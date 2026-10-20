@@ -1,0 +1,282 @@
+/* =========================================================
+   SCREEN 1 : Envelope (lifafa) with wax seal
+   ========================================================= */
+
+.s1 {
+  /* --- Colors: yahan badlo to poori screen badal jayegi --- */
+  --s1-bg-1: #E28383;      /* upar ka coral */
+  --s1-bg-2: #D56B6D;      /* neeche ka gehra coral */
+  --s1-flap: #E07D7E;      /* flap ka rang */
+  --s1-line: rgba(255, 255, 255, .32);
+  --s1-text: #FFF4F2;
+  --s1-text-soft: rgba(255, 244, 242, .78);
+
+  --s1-serif: "Cormorant Garamond", Georgia, serif;
+  --s1-deva:  "Tiro Devanagari Hindi", "Noto Serif Devanagari", serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--s1-text);
+  text-align: center;
+  perspective: 900px;             /* flap ke 3D flip ke liye */
+
+  /* Kaagaz jaisa halka texture */
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(255,255,255,.14), transparent 60%),
+    radial-gradient(80% 50% at 50% 100%, rgba(120,10,20,.12), transparent 70%),
+    linear-gradient(180deg, var(--s1-bg-1), var(--s1-bg-2));
+}
+
+/* =========================================================
+   ENVELOPE: 4 flaps, sab seal ke point (50%, 56%) par milte hain
+   Upar wali lines 34% par kinare se shuru hoti hain
+   ========================================================= */
+
+/* Lifafe ka andar: khulne par yahi dikhta hai (agli screen jaisa rang) */
+.s1-inside {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(90% 60% at 50% 55%, #FFFFFF, transparent 70%),
+    #FBEDEA;
+  z-index: 0;
+}
+
+/* Har flap: bahar wala div ghoomta hai (+ parchhai),
+   andar ka ::before clip-path se shape banata hai */
+.s1-flap {
+  position: absolute;
+  z-index: 1;
+  transform-style: preserve-3d;
+  transition: transform .95s cubic-bezier(.55, 0, .25, 1), filter .95s ease, opacity .25s ease;
+  will-change: transform;
+}
+.s1-flap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--flap-bg);
+  clip-path: var(--flap-shape);
+}
+
+/* Upar ka flap (sabse upar parat) */
+.s1-flap--top {
+  inset: 0 0 auto 0;
+  height: 56%;
+  transform-origin: top center;
+  --flap-shape: polygon(0 0, 100% 0, 100% 60.7%, 50% 100%, 0 60.7%);
+  --flap-bg: linear-gradient(180deg, var(--s1-bg-1), var(--s1-flap));
+  filter: drop-shadow(0 4px 6px rgba(120, 10, 20, .14));
+  z-index: 4;
+}
+/* Baayan flap */
+.s1-flap--left {
+  inset: 0 auto 0 0;
+  width: 50%;
+  transform-origin: left center;
+  --flap-shape: polygon(0 34%, 100% 56%, 0 100%);
+  --flap-bg: linear-gradient(90deg, #DA7577, #DE7C7D);
+  filter: drop-shadow(3px 0 5px rgba(120, 10, 20, .10));
+  z-index: 2;
+}
+/* Daayan flap */
+.s1-flap--right {
+  inset: 0 0 0 auto;
+  width: 50%;
+  transform-origin: right center;
+  --flap-shape: polygon(100% 34%, 0 56%, 100% 100%);
+  --flap-bg: linear-gradient(270deg, #DA7577, #DE7C7D);
+  filter: drop-shadow(-3px 0 5px rgba(120, 10, 20, .10));
+  z-index: 2;
+}
+/* Neeche ka flap */
+.s1-flap--bottom {
+  inset: auto 0 0 0;
+  height: 44%;
+  transform-origin: bottom center;
+  --flap-shape: polygon(0 100%, 50% 0, 100% 100%);
+  --flap-bg: linear-gradient(0deg, var(--s1-bg-2), #DA7374);
+  filter: drop-shadow(0 -3px 5px rgba(120, 10, 20, .10));
+  z-index: 3;
+}
+
+/* Flaps ke kinare ki patli safed lines */
+.s1-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity .3s ease;
+}
+.s1-lines polyline {
+  fill: none;
+  stroke: var(--s1-line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;   /* stretch hone par bhi line patli rahe */
+}
+
+/* ---------- Top: Om + shloka ---------- */
+.s1-top {
+  position: relative;
+  z-index: 6;
+  padding-top: 15vh;
+  transition: opacity .5s ease, transform .5s ease;
+}
+.s1-om {
+  font-family: var(--s1-deva);
+  font-size: clamp(64px, 20vw, 92px);
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(120, 10, 20, .18);
+}
+.s1-ganesh {
+  font-family: var(--s1-deva);
+  font-size: 13px;
+  margin-top: 10px;
+  color: var(--s1-text-soft);
+  letter-spacing: .02em;
+}
+
+/* ---------- Center: Seal ---------- */
+.s1-center {
+  position: absolute;
+  left: 50%;
+  top: 56%;                       /* lines ka milan point (SVG mein 56) */
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.s1-seal {
+  position: relative;
+  width: clamp(104px, 30vw, 128px);
+  aspect-ratio: 1;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  filter: drop-shadow(0 8px 14px rgba(110, 10, 20, .35));
+  transition: transform .25s ease;
+}
+.s1-seal svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: s1-float 3s ease-in-out infinite;
+}
+.s1-seal:hover  { transform: scale(1.04); }
+.s1-seal:active { transform: scale(.94); }
+.s1-seal:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+
+/* Tap karne ka ishara: pulse ring */
+.s1-ring {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, .7);
+  animation: s1-pulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+.s1-hint {
+  margin-top: 12px;
+  font-family: var(--s1-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--s1-text-soft);
+  letter-spacing: .04em;
+  transition: opacity .3s ease;
+}
+
+/* ---------- Bottom: Family ---------- */
+.s1-bottom {
+  position: relative;
+  z-index: 6;
+  padding-bottom: 7vh;
+  font-family: var(--s1-serif);
+  transition: opacity .5s ease;
+}
+.s1-love   { font-style: italic; font-size: 18px; }
+.s1-family { font-size: 16px; color: var(--s1-text-soft); margin-top: 2px; letter-spacing: .03em; }
+
+/* =========================================================
+   OPENING STATE  (JS .is-opening class lagata hai)
+   ========================================================= */
+.s1.is-opening .s1-seal {
+  animation: s1-break .7s cubic-bezier(.5, 0, .3, 1) forwards;
+}
+.s1.is-opening .s1-ring,
+.s1.is-opening .s1-hint { opacity: 0; animation: none; }
+
+.s1.is-opening .s1-top {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition-delay: .2s;
+}
+.s1.is-opening .s1-bottom {
+  opacity: 0;
+  transition-delay: .2s;
+}
+.s1.is-opening .s1-lines {
+  opacity: 0;
+  transition-delay: .4s;
+}
+
+/* Flaps ek ke baad ek khulte hain: upar -> side -> neeche */
+.s1.is-opening .s1-flap--top {
+  transform: rotateX(180deg);
+  filter: drop-shadow(0 -6px 10px rgba(120, 10, 20, .25)) brightness(1.15);
+  opacity: 0;
+  transition-delay: .45s, .45s, 1.30s;
+}
+.s1.is-opening .s1-flap--left {
+  transform: rotateY(-180deg);
+  filter: drop-shadow(-6px 0 10px rgba(120, 10, 20, .2)) brightness(1.1);
+  opacity: 0;
+  transition-delay: .7s, .7s, 1.55s;
+}
+.s1.is-opening .s1-flap--right {
+  transform: rotateY(180deg);
+  filter: drop-shadow(6px 0 10px rgba(120, 10, 20, .2)) brightness(1.1);
+  opacity: 0;
+  transition-delay: .7s, .7s, 1.55s;
+}
+.s1.is-opening .s1-flap--bottom {
+  transform: rotateX(-180deg);
+  filter: drop-shadow(0 6px 10px rgba(120, 10, 20, .2)) brightness(1.1);
+  opacity: 0;
+  transition-delay: .9s, .9s, 1.75s;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes s1-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+@keyframes s1-pulse {
+  0%   { transform: scale(1);   opacity: .8; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+@keyframes s1-break {
+  0%   { transform: scale(1)    rotate(0);     opacity: 1; }
+  30%  { transform: scale(.88)  rotate(-6deg); opacity: 1; }
+  100% { transform: scale(1.35) rotate(12deg); opacity: 0; }
+}
+
+/* Chhoti height wale phones */
+@media (max-height: 640px) {
+  .s1-top    { padding-top: 9vh; }
+  .s1-bottom { padding-bottom: 5vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s1-seal svg, .s1-ring { animation: none; }
+  .s1-flap { transition: opacity .4s ease !important; }
+  .s1.is-opening .s1-flap { transform: none; opacity: 0; }
+}

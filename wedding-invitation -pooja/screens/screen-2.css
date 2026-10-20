@@ -1,0 +1,1305 @@
+/* =========================================================
+   SCREEN 2 : Couple photo + naam
+   Photo: assets/couple.jpg  (portrait / khadi photo best)
+   ========================================================= */
+
+.s2 {
+  --s2-script: "Great Vibes", "Allura", cursive;
+  --s2-text: rgba(255, 255, 255, .72);
+  /* naam ka rang: halka faded white */
+
+  background: #FBF6F2;
+  /* neeche wale hissa ka kaagaz rang */
+  color: var(--s2-text);
+}
+
+/* ---------- Pehla hissa: poori screen ---------- */
+.s2-hero {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: #C8664F;
+  /* photo load hone tak */
+}
+
+/* ---------- Photo ---------- */
+.s2-photo {
+  position: absolute;
+  inset: 0;
+  /* Photo na mile to ye garam gradient dikhega */
+  background:
+    url("../assets/couple.jpeg") center 20% / cover no-repeat,
+    radial-gradient(120% 80% at 50% 20%, #F0A070, #C8664F 60%, #8E3B2E);
+  transform: scale(1.12);
+}
+
+.s2.active .s2-photo {
+  animation: s2-kenburns 12s ease-out forwards;
+}
+
+/* Neeche halka andhera taaki naam saaf padhe */
+.s2-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 55%, rgba(20, 10, 20, .15) 75%, rgba(20, 8, 15, .35) 100%);
+  pointer-events: none;
+}
+
+/* ---------- Naam ---------- */
+.s2-names {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14%;
+  text-align: center;
+  font-family: var(--s2-script);
+  line-height: .95;
+  text-shadow: 0 0 10px rgba(255, 255, 255, .25), 0 1px 3px rgba(40, 10, 5, .2);
+}
+
+.s2-name {
+  display: block;
+  font-size: clamp(48px, 15vw, 68px);
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.s2-amp {
+  display: block;
+  font-size: clamp(34px, 10vw, 46px);
+  margin: 4px 0;
+  opacity: 0;
+}
+
+.s2-tag {
+  display: block;
+  margin-top: 14px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 14px;
+  letter-spacing: .08em;
+  opacity: 0;
+  color: rgba(255, 255, 255, .7);
+  text-shadow: 0 1px 3px rgba(40, 10, 5, .25);
+}
+
+/* Screen aate hi naam ek-ek karke aate hain */
+.s2.active .s2-name--1 {
+  animation: s2-rise 1s ease .5s forwards;
+}
+
+.s2.active .s2-amp {
+  animation: s2-fade 1s ease 1s forwards;
+}
+
+.s2.active .s2-name--2 {
+  animation: s2-rise 1s ease 1.3s forwards;
+}
+
+.s2.active .s2-tag {
+  animation: s2-fade 1s ease 1.9s forwards;
+}
+
+/* ---------- Scroll ishara (arrow upar, SCROLL neeche) ---------- */
+.s2-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: calc(22px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 6px 14px;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, .85);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+.s2.active .s2-scroll {
+  animation: s2-fade 1s ease 2.4s forwards;
+}
+
+.s2.is-scrolled .s2-scroll {
+  visibility: hidden;
+}
+
+.s2-scroll:focus-visible {
+  outline: 1.5px solid #fff;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.s2-scroll-arrow {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 3px rgba(20, 5, 5, .7));
+  animation: s2-bounce 1.6s ease-in-out infinite;
+}
+
+.s2-scroll-text {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  padding-left: .3em;
+  /* letter-spacing ka balance */
+  text-shadow: 0 1px 4px rgba(20, 5, 5, .7);
+}
+
+/* ---------- Doosra hissa: Save The Date ---------- */
+.s2-next {
+  --s2-ink: #6E3B3B;
+  /* line art + heading ka rang */
+  --s2-ink-soft: #8C6461;
+  /* paragraph ka rang */
+
+  position: relative;
+  min-height: 100%;
+  padding: 28px 28px 24px;  /* neeche thodi si khaali jagah */
+  /* neeche: music button ke liye thodi jagah */
+  background:
+    radial-gradient(90% 50% at 50% 35%, rgba(255, 255, 255, .6), transparent 70%),
+    linear-gradient(180deg, #F8ECEA, #F4E2DF);
+  color: var(--s2-ink);
+  text-align: center;
+}
+
+/* Haath ki line art image */
+.s2-hands {
+  display: block;
+  width: min(100%, 340px);
+  height: auto;
+  margin: 8px auto 0;
+}
+
+.s2-save {
+  margin-top: 18px;
+}
+
+.s2-save-title {
+  font-family: var(--s2-script);
+  font-weight: 400;
+  font-size: clamp(38px, 11vw, 48px);
+  line-height: 1.1;
+}
+
+.s2-save-date {
+  margin-top: 10px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(28px, 8.5vw, 36px);
+  letter-spacing: .14em;
+  padding-left: .14em;
+}
+
+/* ---------- Scratch: glittery rose-gold heart ---------- */
+.s2-scratch-hint {
+  margin-top: 18px;
+  font-family: "Great Vibes", "Allura", cursive;
+  font-size: clamp(22px, 6vw, 28px);
+  color: #B56070;
+  letter-spacing: .02em;
+  transition: opacity .6s ease;
+  text-shadow: 0 1px 6px rgba(185, 100, 110, .25);
+}
+
+.s2-scratch.is-done~.s2-scratch-hint,
+.s2-scratch-hint.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.s2-scratch {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: clamp(10px, 3.5vw, 16px);
+  margin-top: 12px;
+}
+
+.s2-heart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.s2-heart-box {
+  position: relative;
+  width: clamp(80px, 24vw, 92px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+/* Neeche wala halka dil (scratch ke baad dikhta hai) */
+.s2-heart-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* Rich multi-layered rose-gold glow matching reference */
+  filter:
+    drop-shadow(0 0 18px rgba(200, 100, 120, .35))
+    drop-shadow(0 6px 16px rgba(160, 70, 90, .30))
+    drop-shadow(0 2px 4px rgba(100, 40, 55, .20));
+}
+
+.s2-heart-base {
+  /* Transparent so page background shows through after scratch */
+  fill: transparent;
+}
+
+.s2-heart-outline {
+  fill: none;
+  stroke: rgba(185, 90, 110, .70);
+  stroke-width: 1.8;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Rang neeche se upar bharta hai (scratch ke baad) */
+.s2-heart-liquid {
+  transform-box: fill-box;
+  transform: translateY(100%);
+  transition: transform 1.8s cubic-bezier(.3, .7, .3, 1) .2s;
+}
+
+.s2-heart.is-revealed .s2-heart-liquid {
+  transform: none;
+}
+
+.s2-heart-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 28% 8% 18%;
+  /* hidden until reveal */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease .4s;
+}
+
+/* Ek bada dil: poori date andar */
+.s2-heart--single .s2-heart-box {
+  width: clamp(170px, 50vw, 200px);
+}
+
+.s2-heart.is-revealed .s2-heart-value {
+  opacity: 1;
+}
+
+/* --- Reveal content typography --- */
+.s2-rv-invited {
+  display: block;
+  font-family: "Great Vibes", "Allura", cursive;
+  font-size: clamp(18px, 5.2vw, 22px);
+  color: #B05060;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.s2-rv-date {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(13px, 3.8vw, 16px);
+  color: #7A3040;
+  letter-spacing: .02em;
+  line-height: 1.3;
+  font-variant-numeric: lining-nums;
+}
+
+.s2-rv-day {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(11px, 3.2vw, 13px);
+  color: #A06070;
+  margin-top: 1px;
+}
+
+.s2-rv-time {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(10px, 2.8vw, 12px);
+  color: #A06070;
+  letter-spacing: .05em;
+  margin-top: 1px;
+}
+
+.s2-heart--single .s2-heart-value {
+  padding: 26% 10% 16%;
+}
+
+.s2-heart-label {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--s2-ink-soft);
+}
+
+/* Upar ki rose parat (canvas, dil ke shape mein) */
+.s2-heart-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  /* yahan ungli scratch kare, page scroll na ho */
+  cursor: grab;
+  transition: opacity .6s ease;
+}
+
+/* Dil apni jagah par rehta hai, bas aaram se saans jaisa halka bada-chhota hota hai */
+.s2-heart-box {
+  animation: s2-heart-pulse 2.6s ease-in-out infinite;
+}
+
+/* Glitter shimmer overlay on the canvas heart */
+.s2-heart-canvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 35% 30%, rgba(255,255,255,.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.s2-heart.is-revealed .s2-heart-canvas {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.s2-heart.is-revealed .s2-heart-value {
+  animation: s2-date-pop .9s cubic-bezier(.34, 1.56, .64, 1) .3s both;
+}
+
+/* ---------- Floating particle hearts (scattered around on reveal) ---------- */
+.s2-heart-particles {
+  position: absolute;
+  inset: -60px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease .6s;
+}
+
+.s2-scratch.is-done .s2-heart-particles {
+  opacity: 1;
+}
+
+.s2-particle {
+  position: absolute;
+  color: #D4848E;
+  font-size: 10px;
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Each particle: different position + size + drift animation */
+.s2-scratch.is-done .s2-particle { animation: s2-particle-drift 3.2s ease-in-out infinite; }
+
+.s2-particle--1  { top: 10%;  left: 12%;  font-size: 8px;  animation-delay: 0s;    color: #C9707A; }
+.s2-particle--2  { top: 6%;   left: 48%;  font-size: 12px; animation-delay: .5s;   color: #D48490; }
+.s2-particle--3  { top: 8%;   right: 14%; font-size: 7px;  animation-delay: 1.1s;  color: #BA6070; }
+.s2-particle--4  { top: 40%;  left: 2%;   font-size: 9px;  animation-delay: .3s;   color: #D4848E; }
+.s2-particle--5  { top: 40%;  right: 2%;  font-size: 11px; animation-delay: .8s;   color: #C0707C; }
+.s2-particle--6  { bottom: 18%; left: 8%;  font-size: 10px; animation-delay: 1.5s; color: #D4848E; }
+.s2-particle--7  { bottom: 14%; left: 40%; font-size: 8px;  animation-delay: .6s;  color: #C86878; }
+.s2-particle--8  { bottom: 18%; right: 8%; font-size: 12px; animation-delay: .2s;  color: #BA6070; }
+.s2-particle--9  { top: 22%;  left: 24%;  font-size: 6px;  animation-delay: 1.8s; color: #D4848E; }
+
+@keyframes s2-particle-drift {
+  0%   { opacity: 0; transform: scale(0) translateY(0); }
+  20%  { opacity: .9; transform: scale(1) translateY(-4px); }
+  60%  { opacity: .7; }
+  100% { opacity: 0; transform: scale(.8) translateY(-18px); }
+}
+
+@keyframes s2-heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+@keyframes s2-date-pop {
+  0% {
+    transform: scale(.6);
+    opacity: 0;
+  }
+
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.s2-save-text {
+  max-width: 300px;
+  margin: 26px auto 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--s2-ink-soft);
+}
+
+.s2-save-text+.s2-save-text {
+  margin-top: 22px;
+}
+
+/* ---------- Countdown ---------- */
+.s2-count {
+  margin-top: 44px;
+}
+
+.s2-count-title {
+  font-family: var(--s2-script);
+  font-weight: 400;
+  font-size: clamp(30px, 9vw, 38px);
+  line-height: 1.1;
+}
+
+.s2-count-grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(10px, 3.5vw, 16px);
+  margin-top: 20px;
+}
+
+.s2-count-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.s2-count-box {
+  display: grid;
+  place-items: center;
+  width: clamp(56px, 16vw, 66px);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #C27178, #A9555D);
+  box-shadow: 0 6px 14px rgba(120, 40, 50, .22), inset 0 1px 0 rgba(255, 255, 255, .2);
+  color: #FFF6F4;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(24px, 7vw, 28px);
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.s2-count-label {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 14px;
+  color: var(--s2-ink-soft);
+  letter-spacing: .03em;
+}
+
+/* ---------- Groom: A Promise for a Lifetime ---------- */
+.s2-promise {
+  position: relative;
+  margin: 72px -12px 0;
+  /* frame thoda chauda */
+  padding: 0 0 8px;
+}
+
+.s2-flourish {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--s2-ink);
+  opacity: .8;
+}
+
+/* Kono se neeche jaati patli side lines (SVG ke kone 12/340 = 3.53% par) */
+.s2-promise::before,
+.s2-promise::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: 20.59% 0;
+  /* = SVG ki height (70/340): line upar-neeche dono kono se judi rahe */
+  width: 1px;
+  background: var(--s2-ink);
+  opacity: .4;
+}
+
+.s2-promise::before {
+  left: 3.53%;
+}
+
+.s2-promise::after {
+  right: 3.53%;
+}
+
+/* Neeche ki bel: upar wali ko ulta kar diya */
+.s2-flourish--bottom {
+  margin-top: 18px;
+  transform: scaleY(-1);
+}
+
+.s2-promise-title {
+  margin-top: 6px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(19px, 5.6vw, 22px);
+  letter-spacing: .06em;
+}
+
+.s2-promise-family {
+  max-width: 260px;
+  margin: 6px auto 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--s2-ink-soft);
+}
+
+/* Photo card */
+.s2-portrait {
+  width: min(74%, 280px);
+  aspect-ratio: 4 / 5;
+  margin: 22px auto 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #EED9D5;
+  box-shadow: 0 14px 30px rgba(110, 59, 59, .22), 0 2px 6px rgba(110, 59, 59, .12);
+}
+
+.s2-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  /* chehra upar ki taraf hai */
+}
+
+/* Dulhan ki photo pehle se crop hai: beech se dikhao */
+.s2-portrait--bride img {
+  object-position: center 30%;
+}
+
+/* Groom aur bride ke beech bada & */
+.s2-promise-amp {
+  margin: 30px 0 6px;
+  font-family: var(--s2-script);
+  font-size: clamp(54px, 16vw, 64px);
+  line-height: 1;
+  opacity: .9;
+}
+
+.s2-portrait-name {
+  margin-top: 20px;
+  font-family: var(--s2-script);
+  font-weight: 400;
+  font-size: clamp(36px, 10.5vw, 44px);
+  line-height: 1.1;
+}
+
+/* ---------- The Celebrations: events timeline ---------- */
+.s2-celebrations {
+  margin-top: 56px;
+  text-align: left;
+}
+
+.s2-celebrations-title {
+  text-align: center;
+  font-family: var(--s2-script);
+  font-weight: 400;
+  font-size: clamp(36px, 10.5vw, 44px);
+  line-height: 1.1;
+}
+
+.s2-timeline {
+  --line-x: 10px;
+  /* timeline line kahan hai */
+  position: relative;
+  margin-top: 28px;
+  padding: 0 0 34px 34px;
+}
+
+/* Upar se neeche patli line */
+.s2-timeline::before {
+  content: "";
+  position: absolute;
+  left: var(--line-x);
+  top: 8px;
+  bottom: 14px;
+  width: 1.5px;
+  background: var(--s2-ink);
+  opacity: .55;
+}
+
+.s2-event {
+  position: relative;
+  padding-bottom: 38px;
+}
+
+.s2-event:last-of-type {
+  padding-bottom: 8px;
+}
+
+/* Har event par bhara hua dil */
+.s2-event-heart,
+.s2-timeline-end {
+  position: absolute;
+  left: calc(var(--line-x) - 34px - 6px);
+  width: 13px;
+  height: 13px;
+  background: var(--s2-ink);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-4.6-9.6-9.1C.9 8.6 2.7 4.5 6.6 4.5c2.2 0 3.7 1.2 5.4 3.2 1.7-2 3.2-3.2 5.4-3.2 3.9 0 5.7 4.1 4.2 7.4C19.5 16.4 12 21 12 21z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-4.6-9.6-9.1C.9 8.6 2.7 4.5 6.6 4.5c2.2 0 3.7 1.2 5.4 3.2 1.7-2 3.2-3.2 5.4-3.2 3.9 0 5.7 4.1 4.2 7.4C19.5 16.4 12 21 12 21z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.s2-event-heart {
+  top: 10px;
+}
+
+/* Line ke aakhir mein khaali (outline) dil */
+.s2-timeline-end {
+  bottom: 4px;
+  left: calc(var(--line-x) - 6px);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' d='M12 20s-7.2-4.4-9.1-8.6C1.5 8.3 3.2 5 6.6 5c2 0 3.4 1.1 5.4 3.4C14 6.1 15.4 5 17.4 5c3.4 0 5.1 3.3 3.7 6.4C19.2 15.6 12 20 12 20z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' d='M12 20s-7.2-4.4-9.1-8.6C1.5 8.3 3.2 5 6.6 5c2 0 3.4 1.1 5.4 3.4C14 6.1 15.4 5 17.4 5c3.4 0 5.1 3.3 3.7 6.4C19.2 15.6 12 20 12 20z'/%3E%3C/svg%3E");
+}
+
+.s2-event-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.s2-event-name {
+  font-family: var(--s2-script);
+  font-weight: 400;
+  font-size: clamp(28px, 8.5vw, 34px);
+  line-height: 1.05;
+}
+
+.s2-event-time {
+  flex-shrink: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  letter-spacing: .05em;
+  color: var(--s2-ink-soft);
+}
+
+.s2-event-time,
+.s2-event-date {
+  font-variant-numeric: lining-nums;
+}
+
+.s2-event-date {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.s2-event-day {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.s2-event-weekday {
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--s2-ink-soft);
+}
+
+.s2-event-venue {
+  margin-top: 4px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 15.5px;
+  color: var(--s2-ink-soft);
+}
+
+.s2-event-btn {
+  display: block;
+  margin-top: 16px;
+  padding: 11px 16px;
+  border-radius: 999px;
+  background: linear-gradient(160deg, #C27178, #A9555D);
+  box-shadow: 0 6px 14px rgba(120, 40, 50, .2);
+  color: #FFF6F4;
+  text-align: center;
+  text-decoration: none;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
+  letter-spacing: .06em;
+}
+
+.s2-event-btn:active {
+  filter: brightness(.95);
+}
+
+.s2-event-btn:focus-visible {
+  outline: 2px solid var(--s2-ink);
+  outline-offset: 3px;
+}
+
+/* ---------- A Legacy of Love: photo slider ---------- */
+.s2-legacy {
+  margin-top: 64px;
+}
+
+.s2-legacy-title {
+  font-family: var(--s2-script);
+  font-weight: 400;
+  font-size: clamp(36px, 10.5vw, 44px);
+  line-height: 1.1;
+}
+
+.s2-legacy-sub {
+  margin-top: 6px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15.5px;
+  letter-spacing: .03em;
+  color: var(--s2-ink-soft);
+}
+
+/* Upar aur neeche ki bel: frame jaisi, bas side lines nahi */
+.s2-legacy-flourish {
+  margin: 0 -12px 10px;
+}
+
+.s2-legacy-flourish.s2-flourish--bottom {
+  margin: 20px -12px 0;
+}
+
+/* Slider poori chaudai mein (page ki side padding ke bahar tak) */
+.s2-gallery {
+  --slide-w: calc(min(100vw, 480px) * .78);
+  /* beech wali photo ki chaudai */
+  margin: 14px -28px -24px;
+  /* neeche: parchhai wali extra jagah wapas */
+}
+
+/* Patti: haath se swipe (scroll-snap) + JS se auto slide */
+.s2-gallery-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* upar-neeche parchhai ke liye jagah */
+  padding: 18px 0 44px;
+}
+
+/* Shuru aur aakhir mein khaali jagah, taaki pehli/aakhri photo bhi beech mein aa sake
+   (padding se nahi - browser aakhri padding ko scroll mein ginta nahi) */
+.s2-gallery-track::before,
+.s2-gallery-track::after {
+  content: "";
+  flex: 0 0 calc((100% - var(--slide-w)) / 2 - 12px);
+  /* 12px = gap */
+}
+
+.s2-gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.s2-gallery-track {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.s2-gallery-track.is-dragging {
+  cursor: grabbing;
+}
+
+.s2-gallery-track img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* Har photo: gol kone, parchhai; jo beech mein nahi wo chhoti + halki */
+.s2-slide {
+  flex: 0 0 var(--slide-w);
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #EED9D5;
+  box-shadow: 0 10px 20px rgba(110, 59, 59, .2), 0 2px 5px rgba(110, 59, 59, .12);
+  scroll-snap-align: center;
+  transform: scale(.86);
+  opacity: .55;
+  transition: transform .55s cubic-bezier(.2, .7, .2, 1), opacity .55s ease;
+}
+
+.s2-slide.is-active {
+  transform: none;
+  opacity: 1;
+}
+
+.s2-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* ---------- Aakhri hissa: RSVP lifafa ---------- */
+.s2-rsvp {
+  margin-top: 40px;
+}
+
+/* Lifafa poori chaudai mein */
+.s2-envelope {
+  position: relative;
+  margin: 0 -28px;
+  aspect-ratio: 400 / 360;
+  overflow: hidden;
+  /* card ka neeche wala hissa lifafe ke andar chhupa rahe */
+}
+
+.s2-env-back,
+.s2-env-front {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.s2-env-front {
+  z-index: 2;
+  filter: drop-shadow(0 -4px 8px rgba(110, 30, 40, .15));
+}
+
+/* Card: peeche aur saamne wale hisse ke beech, isliye lifafe ke andar se nikalta lagta hai */
+.s2-card {
+  position: absolute;
+  z-index: 1;
+  left: 16%;
+  right: 16%;
+  top: 5%;
+  height: 84%;
+  /* neeche ka hissa lifafe mein chhupa rehta hai */
+  padding: 30px 18px 0;
+  /* page jaisa hi blush rang */
+  background: linear-gradient(180deg, #FBF1EF, #F6E6E3);
+  border: 1px solid rgba(110, 59, 59, .28);
+  box-shadow: 0 6px 18px rgba(110, 59, 59, .16);
+  color: var(--s2-ink);
+}
+
+/* Andar ki doosri patli line (double frame) */
+.s2-card::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(110, 59, 59, .22);
+  pointer-events: none;
+}
+
+/* Upar beech ka kamal: frame ki line ke upar, line ko todta hua */
+.s2-card-lotus {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 46px;
+  height: 21px;
+  transform: translateX(-50%);
+  padding: 0 4px;
+  background: #FBF1EF;
+  color: var(--s2-ink);
+  opacity: .75;
+}
+
+.s2-card-corner {
+  position: absolute;
+  top: 4px;
+  width: 26px;
+  height: 26px;
+  color: var(--s2-ink);
+  opacity: .6;
+}
+
+.s2-card-corner--tl {
+  left: 4px;
+}
+
+.s2-card-corner--tr {
+  right: 4px;
+  transform: scaleX(-1);
+}
+
+.s2-card-divider {
+  display: block;
+  width: 96px;
+  height: 10px;
+  margin: 8px auto 0;
+  color: var(--s2-ink);
+  opacity: .5;
+}
+
+.s2-card-love {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(16px, 4.6vw, 19px);
+  font-weight: 500;
+}
+
+.s2-card-label {
+  margin-top: 6px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 12.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--s2-ink-soft);
+}
+
+.s2-card-contacts {
+  list-style: none;
+  margin-top: 10px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(13.5px, 3.8vw, 16px);
+  font-variant-numeric: lining-nums;
+}
+
+.s2-card-contacts li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+}
+
+.s2-card-contacts a {
+  color: var(--s2-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  white-space: nowrap;
+}
+
+/* Mohar: V ki nok par */
+.s2-env-seal {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 77.8%;
+  /* 280 / 360: V ki nok */
+  width: clamp(72px, 21vw, 92px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 6px 10px rgba(110, 10, 20, .35));
+}
+
+.s2-env-seal svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* =========================================================
+   SCROLL EFFECTS
+   JS dikhne par .is-visible lagata hai; --d = ek saath aane wali
+   cheezon ke beech ka chhota delay
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity .9s ease,
+    transform .9s cubic-bezier(.2, .7, .2, 1),
+    filter .9s ease,
+    letter-spacing 1.4s cubic-bezier(.2, .7, .2, 1);
+  transition-delay: var(--d, 0s);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Blur se saaf: paragraphs */
+.reveal--blur {
+  filter: blur(6px);
+  transform: translateY(12px);
+}
+
+/* Handwriting: script text baayein se daayein likha hua aata hai.
+   Mask (clip-path nahi) - taaki scroll detection theek kaam kare.
+   Gradient ka halka kinara likhne jaisa soft edge deta hai. */
+.reveal--write,
+.reveal--wipe {
+  transform: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent);
+  mask-image: linear-gradient(90deg, #000 70%, transparent);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+  -webkit-mask-size: 0% 100%;
+  mask-size: 0% 100%;
+  transition:
+    opacity .5s ease var(--d, 0s),
+    -webkit-mask-size 1.6s cubic-bezier(.5, 0, .3, 1) var(--d, 0s),
+    mask-size 1.6s cubic-bezier(.5, 0, .3, 1) var(--d, 0s);
+}
+
+.reveal--wipe {
+  transition-duration: .5s, 2.2s, 2.2s;
+}
+
+.reveal--write.is-visible,
+.reveal--wipe.is-visible {
+  -webkit-mask-size: 145% 100%;
+  mask-size: 145% 100%;
+}
+
+/* Date: akshar door se paas aate hain */
+.reveal--spread {
+  letter-spacing: .5em;
+  filter: blur(4px);
+  transform: none;
+}
+
+.reveal--spread.is-visible {
+  letter-spacing: .14em;
+}
+
+/* Countdown tiles aur &: halka bounce ke saath */
+.reveal--pop {
+  transform: scale(.6) translateY(12px);
+  transition-timing-function: ease, cubic-bezier(.34, 1.56, .64, 1), ease, ease;
+  transition-duration: .6s, .8s, .6s, .6s;
+}
+
+/* Bel (flourish): beech se dono taraf khulti hai */
+.reveal--bloom {
+  transform: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 0% 100%;
+  mask-size: 0% 100%;
+  transition:
+    opacity .6s ease var(--d, 0s),
+    -webkit-mask-size 1.8s cubic-bezier(.5, 0, .3, 1) var(--d, 0s),
+    mask-size 1.8s cubic-bezier(.5, 0, .3, 1) var(--d, 0s);
+}
+
+.reveal--bloom.is-visible {
+  -webkit-mask-size: 130% 100%;
+  mask-size: 130% 100%;
+}
+
+/* neeche wali bel ulti hi rahe */
+.s2-flourish--bottom.reveal,
+.s2-flourish--bottom.reveal.is-visible {
+  transform: scaleY(-1);
+}
+
+/* Photo card: parda upar uthta hai + photo halki zoom-out */
+.reveal--photo {
+  transform: translateY(24px);
+}
+
+.reveal--photo img {
+  clip-path: inset(100% 0 0 0);
+  transform: scale(1.25);
+  transition:
+    clip-path 1.4s cubic-bezier(.6, 0, .2, 1) calc(var(--d, 0s) + .15s),
+    transform 2.2s cubic-bezier(.2, .7, .2, 1) calc(var(--d, 0s) + .15s);
+}
+
+.reveal--photo.is-visible img {
+  clip-path: inset(0 0 0 0);
+  transform: none;
+}
+
+/* Frame ki side lines upar se neeche banti hain */
+.reveal-lines::before,
+.reveal-lines::after {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 2.6s cubic-bezier(.6, 0, .2, 1) .4s;
+}
+
+.reveal-lines.is-visible::before,
+.reveal-lines.is-visible::after {
+  transform: scaleY(1);
+}
+
+/* Card lifafe ke andar se upar nikalta hai */
+.reveal-card .s2-card {
+  transform: translateY(42%);
+  transition: transform 1.6s cubic-bezier(.2, .7, .2, 1) .3s;
+}
+
+.reveal-card.is-visible .s2-card {
+  transform: none;
+}
+
+/* Timeline ki line upar se neeche banti hai */
+.reveal-line::before {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 2.4s cubic-bezier(.6, 0, .2, 1) .2s;
+}
+
+.reveal-line.is-visible::before {
+  transform: scaleY(1);
+}
+
+/* ---------- Upar ki photo: parallax ---------- */
+/* --s2-y = kitna scroll hua (JS se). translate alag property hai,
+   isliye Ken Burns wala transform animation bhi chalta rahe */
+.s2-photo {
+  translate: 0 calc(var(--s2-y, 0) * .4px);
+}
+
+.s2-names {
+  translate: 0 calc(var(--s2-y, 0) * -.15px);
+  opacity: calc(1 - var(--s2-y, 0) / 380);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes s2-kenburns {
+  from {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes s2-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes s2-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes s2-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: .75;
+  }
+
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s2-photo {
+    transform: none;
+    animation: none !important;
+  }
+
+  .s2-heart-box {
+    animation: none;
+  }
+
+  .s2-name,
+  .s2-amp,
+  .s2-tag,
+  .s2-scroll {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .s2-name {
+    transform: none;
+  }
+
+  .s2-scroll-arrow {
+    animation: none;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    clip-path: none;
+    transition: none;
+  }
+
+  .reveal--spread {
+    letter-spacing: .14em;
+  }
+
+  .reveal--write,
+  .reveal--wipe,
+  .reveal--bloom {
+    -webkit-mask: none;
+    mask: none;
+  }
+
+  .reveal--photo img {
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+
+  .s2-flourish--bottom.reveal {
+    transform: scaleY(-1);
+  }
+
+  .s2-slide {
+    transition: none;
+  }
+
+  .reveal-lines::before,
+  .reveal-lines::after,
+  .reveal-line::before {
+    transform: none;
+    transition: none;
+  }
+
+  .s2-photo,
+  .s2-names {
+    translate: none;
+    opacity: 1;
+  }
+}
+
+/* RSVP card: bina number wale naam, beech mein */
+.s2-card-names {
+  list-style: none;
+  margin-top: 6px;
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(13.5px, 3.8vw, 16px);
+  line-height: 1.6;
+  color: var(--s2-ink);
+}
